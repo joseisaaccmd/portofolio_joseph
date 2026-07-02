@@ -22,7 +22,7 @@ class PortfolioController extends Controller
         $profile = [
             'name'      => 'Made Ray Joseph Hendrawan',
             'role'      => 'Web Developer',
-            'tagline'   => 'Saya bikin website yang cepat, rapi, dan enak dipakai.',
+            'tagline'   => 'Just Human yang mencoba hal baru di dunia web development, sambil terus belajar dan berinovasi.',
             'photo'     => 'images/profile.jpg',
             'birthplace'=> 'Blimbingsari, Jembrana',
             'birthdate' => 'May 29, 2008',
@@ -40,10 +40,10 @@ class PortfolioController extends Controller
         ];
 
         $stats = [
-            ['value' => '2+', 'label' => 'Tahun Belajar Coding', 'color' => 'yellow'],
-            ['value' => '3+', 'label' => 'Proyek Dibangun', 'color' => 'mint'],
+            ['value' => '1+', 'label' => 'Tahun Belajar Coding', 'color' => 'yellow'],
+            ['value' => '2+', 'label' => 'Proyek Dibangun', 'color' => 'mint'],
             ['value' => '9', 'label' => 'Skill & Tools', 'color' => 'pink'],
-            ['value' => '∞', 'label' => 'Cangkir Kopi', 'color' => 'blue'],
+            ['value' => '∞', 'label' => 'Susu Dancow', 'color' => 'blue'],
         ];
 
         $services = [
@@ -53,27 +53,27 @@ class PortfolioController extends Controller
         ];
 
         $skills = [
-            ['name' => 'HTML & CSS', 'level' => 90, 'icon' => '🌐', 'color' => 'yellow'],
-            ['name' => 'JavaScript', 'level' => 75, 'icon' => '⚡', 'color' => 'pink'],
-            ['name' => 'PHP', 'level' => 80, 'icon' => '🐘', 'color' => 'blue'],
-            ['name' => 'Laravel', 'level' => 70, 'icon' => '🚀', 'color' => 'mint'],
-            ['name' => 'MySQL', 'level' => 75, 'icon' => '🗄️', 'color' => 'yellow'],
-            ['name' => 'Tailwind CSS', 'level' => 85, 'icon' => '🎨', 'color' => 'pink'],
-            ['name' => 'Git & GitHub', 'level' => 80, 'icon' => '🌿', 'color' => 'blue'],
-            ['name' => 'REST API', 'level' => 65, 'icon' => '🔌', 'color' => 'mint'],
-            ['name' => 'Python', 'level' => 90, 'icon' => '🐍', 'color' => 'yellow'],
+            ['name' => 'HTML & CSS', 'level' => 90, 'icon' => '', 'color' => 'yellow'],
+            ['name' => 'JavaScript', 'level' => 75, 'icon' => '', 'color' => 'pink'],
+            ['name' => 'PHP', 'level' => 80, 'icon' => '', 'color' => 'blue'],
+            ['name' => 'Laravel', 'level' => 70, 'icon' => '', 'color' => 'mint'],
+            ['name' => 'MySQL', 'level' => 75, 'icon' => '', 'color' => 'yellow'],
+            ['name' => 'Tailwind CSS', 'level' => 85, 'icon' => '', 'color' => 'pink'],
+            ['name' => 'Git & GitHub', 'level' => 80, 'icon' => '', 'color' => 'blue'],
+            ['name' => 'REST API', 'level' => 65, 'icon' => '', 'color' => 'mint'],
+            ['name' => 'Python', 'level' => 90, 'icon' => '', 'color' => 'yellow'],
         ];
 
         $experiences = [
             [
                 'title'  => 'Junior Web Developer',
-                'place'  => 'Nama Perusahaan / Freelance',
+                'place'  => 'PT. Kreatif Digital Nusantara',
                 'period' => '2025 — Sekarang',
                 'desc'   => 'Mengembangkan dan memelihara fitur website menggunakan Laravel & Tailwind CSS, kolaborasi dengan tim desain.',
             ],
             [
                 'title'  => 'Peserta Bootcamp Web Development',
-                'place'  => 'Nama Bootcamp',
+                'place'  => 'Dicoding Academy',
                 'period' => '2024',
                 'desc'   => 'Belajar fundamental pemrograman web full-stack, mengerjakan beberapa proyek studi kasus.',
             ],
