@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 96px;
+    }
+    body {
+        @apply bg-paper text-ink font-body;
+        background-image:
+            linear-gradient(#14141412 1px, transparent 1px),
+            linear-gradient(90deg, #14141412 1px, transparent 1px);
+        background-size: 32px 32px;
+    }
+}
+
+@layer components {
+    /* Kartu dasar neobrutalism: border tebal + shadow keras (tanpa blur) */
+    .brut-card {
+        @apply border-[3px] border-ink bg-white shadow-brut rounded-none;
+    }
+
+    /* Tombol neobrutalism */
+    .brut-btn {
+        @apply inline-flex items-center gap-2 border-[3px] border-ink bg-yellow px-5 py-2.5
+               font-display text-sm uppercase tracking-wide text-ink shadow-brut-sm
+               transition-all duration-150 ease-out
+               hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brut
+               active:translate-x-0 active:translate-y-0 active:shadow-none;
+    }
+
+    .brut-btn-outline {
+        @apply brut-btn bg-white;
+    }
+
+    /* Label kecil ala tag kode, contoh: <profile> */
+    .tag-mono {
+        @apply font-mono text-xs uppercase tracking-widest text-ink/70;
+    }
+
+    /* Judul section dengan angka/bracket dev-style */
+    .section-title {
+        @apply font-display text-3xl sm:text-4xl md:text-5xl text-ink leading-tight;
+    }
+
+    .chip {
+        @apply border-[2.5px] border-ink bg-white px-3 py-1 font-mono text-xs
+               shadow-brut-sm rotate-[-1deg];
+    }
+}
+
+@layer utilities {
+    /* Animasi muncul saat elemen kelihatan di layar (scroll reveal) */
+    .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Badge mengambang: efek bouncing pelan supaya halaman terasa hidup */
+    @keyframes float-y {
+        0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0deg)); }
+        50%      { transform: translateY(-8px) rotate(var(--tw-rotate, 0deg)); }
+    }
+    .float-badge {
+        animation: float-y 3s ease-in-out infinite;
+    }
+    .float-badge-slow {
+        animation: float-y 4.5s ease-in-out infinite;
+        animation-delay: 0.5s;
+    }
+
+    /* Sticker bintang berputar pelan */
+    @keyframes burst-spin {
+        0%, 100% { transform: rotate(0deg) scale(1); }
+        50%      { transform: rotate(15deg) scale(1.15); }
+    }
+    .burst {
+        animation: burst-spin 2.4s ease-in-out infinite;
+    }
+
+    /* Background papan catur khas neobrutalism, dipakai di loading screen */
+    .checker-bg {
+        background-image:
+            linear-gradient(45deg, #14141422 25%, transparent 25%),
+            linear-gradient(-45deg, #14141422 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #14141422 75%),
+            linear-gradient(-45deg, transparent 75%, #14141422 75%);
+        background-size: 40px 40px;
+        background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+    }
+
+    /* Judul dengan efek teks berlapis warna (signature neobrutalism) */
+    .layered-text {
+        position: relative;
+        color: theme('colors.ink');
+    }
+    .layered-text::before,
+    .layered-text::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        -webkit-text-stroke: 0;
+    }
+    .layered-text::before {
+        color: theme('colors.blue');
+        transform: translate(6px, 6px);
+    }
+    .layered-text::after {
+        color: theme('colors.pink');
+        transform: translate(12px, 12px);
+    }
+
+    /* ===== Loading screen: transisi keluar ===== */
+    #loading-screen {
+        transition: opacity 0.5s ease-out, transform 0.6s ease-out;
+    }
+    #loading-screen.loading-done {
+        opacity: 0;
+        transform: scale(1.05);
+        pointer-events: none;
+    }
+
+    /* Konten situs masuk dengan animasi setelah loading selesai */
+    .site-enter {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    .site-enter.site-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    /* ===== Chibi walker: karakter tersegmentasi biar kaki beneran melangkah ===== */
+    .chibi-walk {
+        animation: chibi-walk-x 2.6s linear infinite;
+    }
+    @keyframes chibi-walk-x {
+        0%   { left: -3.5rem; }
+        100% { left: 100%; }
+    }
+    .chibi {
+        position: relative;
+        width: 38px;
+        height: 52px;
+        animation: chibi-bob 0.3s ease-in-out infinite;
+    }
+    @keyframes chibi-bob {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-3px); }
+    }
+
+    /* Sayap kecil, aksen khas karaktermu */
+    .chibi-wing {
+        position: absolute;
+        top: 20px; left: -8px;
+        width: 14px; height: 16px;
+        background: #3a1418;
+        border: 2px solid theme('colors.ink');
+        clip-path: polygon(0% 100%, 100% 0%, 100% 60%, 60% 40%, 40% 90%, 20% 55%);
+        z-index: 0;
+        transform: rotate(-8deg);
+    }
+
+    .chibi-hair {
+        position: absolute;
+        top: -10px; left: 3px;
+        width: 30px; height: 24px;
+        background: #3b2420;
+        border: 3px solid theme('colors.ink');
+        clip-path: polygon(
+            48% 0%, 62% 8%, 80% 2%, 90% 22%, 100% 38%,
+            88% 35%, 90% 55%, 74% 42%, 62% 52%, 50% 38%,
+            38% 52%, 26% 42%, 10% 55%, 12% 35%, 0% 38%,
+            10% 22%, 18% 2%, 36% 8%
+        );
+        z-index: 3;
+    }
+    .chibi-head {
+        position: absolute;
+        top: 5px; left: 7px;
+        width: 24px; height: 20px;
+        background: #f3dcc7;
+        border: 3px solid theme('colors.ink');
+        border-radius: 50%;
+        z-index: 2;
+        overflow: hidden;
+    }
+    .chibi-head::before,
+    .chibi-head::after {
+        content: '';
+        position: absolute;
+        top: 9px;
+        width: 3.5px; height: 3.5px;
+        background: #4a4a4a;
+        border-radius: 50%;
+    }
+    .chibi-head::before { left: 5px; }
+    .chibi-head::after  { left: 15px; }
+    .chibi-body {
+        position: absolute;
+        top: 22px; left: 5px;
+        width: 28px; height: 19px;
+        background: #1c1c1c;
+        border: 3px solid theme('colors.ink');
+        border-radius: 6px;
+        z-index: 1;
+    }
+    .chibi-leg {
+        position: absolute;
+        bottom: 0;
+        width: 9px; height: 14px;
+        background: #6b6b6b;
+        border: 2px solid theme('colors.ink');
+        animation: chibi-leg-swing 0.3s ease-in-out infinite;
+    }
+    .chibi-leg-l { left: 7px; transform-origin: top; }
+    .chibi-leg-r { left: 20px; transform-origin: top; animation-delay: 0.15s; }
+    @keyframes chibi-leg-swing {
+        0%, 100% { transform: rotate(-20deg); }
+        50%      { transform: rotate(20deg); }
+    }
+
+    /* ===== Blob dekoratif ala poster neobrutalism ===== */
+    .blob {
+        border-radius: 42% 58% 65% 35% / 45% 45% 55% 55%;
+    }
+    .blob-2 {
+        border-radius: 63% 37% 30% 70% / 50% 60% 40% 50%;
+    }
+
+    /* ===== Stempel bulat berputar (signature element) ===== */
+    .spin-stamp {
+        animation: spin-slow 9s linear infinite;
+    }
+    @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+    }
+
+    /* ===== Marquee: pita teks berjalan tanpa putus ===== */
+    .marquee {
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .marquee-track {
+        animation: marquee-scroll 18s linear infinite;
+    }
+    @keyframes marquee-scroll {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+    }
+
+    /* ===== Pola garis diagonal untuk preview kartu proyek ===== */
+    .stripe-pattern::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+            45deg,
+            rgba(20,20,20,0.12) 0px,
+            rgba(20,20,20,0.12) 8px,
+            transparent 8px,
+            transparent 16px
+        );
+        pointer-events: none;
+    }
+
+    /* ===== Tekstur halftone (titik-titik), aksen khas cetak poster ===== */
+    .halftone-bg {
+        background-image: radial-gradient(theme('colors.ink') 1.6px, transparent 1.6px);
+        background-size: 14px 14px;
+        opacity: 0.15;
+    }
+}
